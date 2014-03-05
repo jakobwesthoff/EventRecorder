@@ -1,0 +1,12 @@
+{
+  "name": "EventRecorder",
+  "version": "0.0.0",
+  "authors": [
+    "Jakob Westhoff <jakob@westhoffswelt.de>"
+  ],
+  "license": "MIT",
+  "private": true,
+  "dependencies": {
+    "jquery": "~2.1.0"
+  }
+}
