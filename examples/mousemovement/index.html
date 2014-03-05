@@ -3,14 +3,20 @@
 <head>
     <title>EventMirror Test</title>
     <script type="text/javascript" src="../../bower_components/jquery/dist/jquery.js"></script>
+    <script type="text/javascript" src="../../src/EventEmitter.js"></script>
+    <script type="text/javascript" src="../../src/Transport.js"></script>
+    <script type="text/javascript" src="../../src/TimeshiftTransport.js"></script>
     <script type="text/javascript" src="../../src/EventRecorder.js"></script>
+    <script type="text/javascript" src="../../src/EventPlayer.js"></script>
     <script type="text/javascript">
         $(document).ready(function() {
             var $pointer = $("#pointer");
 
-            window.recorder = new EventRecorder();
+            var timeshift = new TimeshiftTransport();
+            window.recorder = new EventRecorder(timeshift);
+            window.player = new EventPlayer(timeshift);
 
-            recorder.on("played", function(e) {
+            player.on("played", function(e) {
                 if (e.type !== "mousemove") {
                     return;
                 }
@@ -25,7 +31,7 @@
 </head>
 <body>
     <img id="pointer" width="20px" src="images/pointer.svg" style="position: absolute; top: -100px; left: -100px;" />
-    <button style="position: absolute; top: 10px; right: 80px;" onClick="recorder.record();">Record</button>
-    <button style="position: absolute; top: 10px; right: 10px;" onClick="recorder.play();">Replay</button>
+    <button style="position: absolute; top: 10px; right: 80px;" onClick="player.stop(); recorder.record();">Record</button>
+    <button style="position: absolute; top: 10px; right: 10px;" onClick="recorder.stop(); player.play();">Replay</button>
 </body>
 </html>
